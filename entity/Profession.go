@@ -1,9 +1,6 @@
 package entity
 
-import "github.com/jinzhu/gorm"
-
-type Professtion struct {
-	gorm.Model
+type Profession struct {
 	Id int `gorm:"primary_key;AUTO_INCREMENT"`
 	Name string	`gorm:"not null"`
 }

@@ -1,19 +1,16 @@
 package entity
 
-import "github.com/jinzhu/gorm"
-
 type Skill struct {
-	gorm.Model
 	Id int `gorm:"primary_key;AUTO_INCREMENT"`
-	Name string `gorm:"not null"`
-	ImageSrc string `gorm:"not null;"`
+	Name string
+	ImageSrc string
 }
 
 type Hero struct {
-	gorm.Model
 	Id int `gorm:"primary_key;AUTO_INCREMENT"`
 	Name string `gorm:"not null"`
 	ImageSrc string `gorm:"not null"`
-	Professtion
-	Skill
+	ProfessionId int `gorm:"not null`
+	SkillId int `gorm:"not null`
+	Skill Skill `gorm:"ForeignKey:Id"`
 }
