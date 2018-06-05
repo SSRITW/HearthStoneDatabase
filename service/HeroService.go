@@ -17,7 +17,7 @@ func GetHeroInfo(db *gorm.DB,hero *entity.Hero)(heroes []entity.Hero){
 }
 
 func GetHeroInfoById(db *gorm.DB,id int)(hero entity.Hero){
-	db.Where("id = ?",id).Find(&hero).Related(&hero.Skill)
+	db.Debug().Where("id = ?",id).Find(&hero).Related(&hero.Skill)
 	return
 }
 

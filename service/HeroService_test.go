@@ -21,8 +21,8 @@ func TestAddHero(t *testing.T) {
 	hero := entity.Hero{}
 	hero.Name = "test3"
 	hero.ImageSrc = "testImage3"
-	hero.ProfessionId = 3
-	//hero.SkillId = 3
+	hero.ProfessionId = 2
+	hero.SkillId = 1
 
 	AddHero(db,&hero)
 
@@ -52,7 +52,7 @@ func TestGetAllHeroInfo(t *testing.T) {
 func TestGetHeroInfoById(t *testing.T) {
 	db := restgo.OpenDBConnect()
 	defer db.Close()
-	hero := GetHeroInfoById(db,1)
+	hero := GetHeroInfoById(db,2)
 	fmt.Println(hero)
 }
 
@@ -62,3 +62,4 @@ func TestUpdateHero(t *testing.T) {
 	//hero := entity.Hero{1,"update","updateSrc",1,1}
 	//UpdateHero(db,&hero)
 }
+

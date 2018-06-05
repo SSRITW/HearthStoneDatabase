@@ -12,5 +12,5 @@ type Hero struct {
 	ImageSrc string `gorm:"not null"`
 	ProfessionId int `gorm:"not null`
 	SkillId int `gorm:"not null`
-	Skill Skill `gorm:"ForeignKey:Id"`
+	Skill Skill
 }
