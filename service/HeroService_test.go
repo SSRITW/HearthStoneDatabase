@@ -33,6 +33,7 @@ func TestGetHeroInfo(t *testing.T) {
 	db := restgo.OpenDBConnect()
 	defer db.Close()
 	hero := entity.Hero{}
+	hero.Name = "update"
 	hero.ProfessionId = 1
 	heroes := GetHeroInfo(db,&hero)
 	for _,v:=range heroes {

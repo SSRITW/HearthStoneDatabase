@@ -13,7 +13,7 @@ func OpenDBConnect()(*gorm.DB){
 
 	//更改默认表名
 	gorm.DefaultTableNameHandler = func (db *gorm.DB, defaultTableName string) string  {
-		return "f_" + defaultTableName;
+		return "t_" + defaultTableName;
 	}
 
 	var err error
@@ -23,6 +23,7 @@ func OpenDBConnect()(*gorm.DB){
 		fmt.Println(err.Error())
 	}
 	Db.AutoMigrate(&entity.Profession{},&entity.Skill{},&entity.Hero{},&entity.CardType{},&entity.CardPackage{},&entity.CardBase{})
+	Db.LogMode(true)
 	return Db
 }
 
