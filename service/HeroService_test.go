@@ -11,13 +11,6 @@ func TestAddHero(t *testing.T) {
 	db := restgo.OpenDBConnect()
 	defer db.Close()
 
-	/*profession := entity.Profession{}
-	profession.Name = "testprofession"
-
-	skill := entity.Skill{}
-	skill.Name = "skillName"
-	skill.ImageSrc = "imageSrc"*/
-
 	hero := entity.Hero{}
 	hero.Name = "test3"
 	hero.ImageSrc = "testImage3"
@@ -33,22 +26,13 @@ func TestGetHeroInfo(t *testing.T) {
 	db := restgo.OpenDBConnect()
 	defer db.Close()
 	hero := entity.Hero{}
-	hero.Name = "update"
 	hero.ProfessionId = 1
-	heroes := GetHeroInfo(db,&hero)
+	heroes := GetHeroInfo(db,1,2,&hero)
 	for _,v:=range heroes {
 		fmt.Println(v)
 	}
 }
 
-func TestGetAllHeroInfo(t *testing.T) {
-	db := restgo.OpenDBConnect()
-	defer db.Close()
-	heroes := GetAllHeroInfo(db)
-	for _,v:=range heroes {
-		fmt.Println(v)
-	}
-}
 
 func TestGetHeroInfoById(t *testing.T) {
 	db := restgo.OpenDBConnect()
@@ -60,7 +44,7 @@ func TestGetHeroInfoById(t *testing.T) {
 func TestUpdateHero(t *testing.T) {
 	db := restgo.OpenDBConnect()
 	defer db.Close()
-	//hero := entity.Hero{1,"update","updateSrc",1,1}
-	//UpdateHero(db,&hero)
+	hero := entity.Hero{1,"update","updateSrc",1,1}
+	UpdateHero(db,&hero)
 }
 

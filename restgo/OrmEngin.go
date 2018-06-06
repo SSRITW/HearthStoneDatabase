@@ -18,7 +18,7 @@ func OpenDBConnect()(*gorm.DB){
 
 	var err error
 	Db, err = gorm.Open("mysql", "root:123456@(localhost:3306)/hearthstonedb?charset=utf8&parseTime=True&loc=Local")
-	initRelated(Db)
+
 	if err !=nil {
 		fmt.Println(err.Error())
 	}
@@ -27,8 +27,5 @@ func OpenDBConnect()(*gorm.DB){
 	return Db
 }
 
-func initRelated(db *gorm.DB){
-	db.Model(&entity.Hero{}).Related(&entity.Skill{})
-}
 
 
