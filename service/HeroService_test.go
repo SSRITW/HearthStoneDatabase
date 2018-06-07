@@ -27,13 +27,20 @@ func TestGetHeroInfoPage(t *testing.T) {
 	defer db.Close()
 	hero := entity.Hero{}
 	hero.ProfessionId = 1
-	heroes,count:= GetHeroInfoPage(db,1,1,&hero)
-	fmt.Println(count)
+	heroes:= GetHeroInfoPage(db,1,1,&hero)
 	for _,v:=range heroes {
 		fmt.Println(v)
 	}
 }
 
+func TestGetHeroInfoCount(t *testing.T) {
+	db := restgo.OpenDBConnect()
+	defer db.Close()
+	hero := entity.Hero{}
+	hero.ProfessionId = 1
+	count:= GetHeroInfoCount(db,&hero)
+	fmt.Println(count)
+}
 
 func TestGetHeroInfoById(t *testing.T) {
 	db := restgo.OpenDBConnect()

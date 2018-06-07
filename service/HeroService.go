@@ -20,11 +20,16 @@ const
  * @arg pageNum 页码
  * @arg hero 查询条件
  * @return heroes 英雄数据切片
- * @return countNum 数据总条数
  */
-func GetHeroInfoPage(db *gorm.DB,pageSize int,pageNum int,hero *entity.Hero)(heroes []model.Hero,countNum int){
+func GetHeroInfoPage(db *gorm.DB,pageSize int,pageNum int,hero *entity.Hero)(heroes []model.Hero){
 	getWhereQuery(db,hero).Select(_SELECT_STR).Joins(_JOIN_SKILL).Joins(_JOIN_PROFESSION).Table(_TABLE_NAME).
-		Offset(restgo.GetPageOffset(pageSize,pageNum)).Limit(pageSize).Scan(&heroes).Count(&countNum)
+		Offset(restgo.GetPageOffset(pageSize,pageNum)).Limit(pageSize).Scan(&heroes)
+	return
+}
+
+//获取该条件下的总条数
+func GetHeroInfoCount(db *gorm.DB,hero *entity.Hero)(count int){
+	getWhereQuery(db,hero).Select(_SELECT_STR).Joins(_JOIN_SKILL).Joins(_JOIN_PROFESSION).Table(_TABLE_NAME).Count(&count)
 	return
 }
 
