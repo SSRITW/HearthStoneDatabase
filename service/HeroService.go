@@ -48,12 +48,12 @@ func HeroInfoById(db *gorm.DB,id int)(hero model.Hero){
 }
 
 //插入一条新数据,返回影响条数
-func HeroCreate(db *gorm.DB,hero *entity.Hero)(int64){
+func HeroOfCreate(db *gorm.DB,hero *entity.Hero)(int64){
 	return db.Create(&hero).RowsAffected
 }
 
 //只更新struct里非空字段,返回影响条数
-func HeroUpdate(db *gorm.DB,hero *entity.Hero)(int64){
+func HeroOfUpdate(db *gorm.DB,hero *entity.Hero)(int64){
 	return db.Model(&hero).Updates(&hero).RowsAffected
 }
 

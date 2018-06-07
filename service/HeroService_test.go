@@ -17,7 +17,7 @@ func TestAddHero(t *testing.T) {
 	hero.ProfessionId = 2
 	hero.SkillId = 1
 
-	HeroCreate(db,&hero)
+	HeroOfCreate(db,&hero)
 
 }
 
@@ -53,6 +53,6 @@ func TestUpdateHero(t *testing.T) {
 	db := restgo.OpenDBConnect()
 	defer db.Close()
 	hero := entity.Hero{1,"update2","updateSrc2",0,0}
-	fmt.Println(HeroUpdate(db,&hero))
+	fmt.Println(HeroOfUpdate(db,&hero))
 }
 
