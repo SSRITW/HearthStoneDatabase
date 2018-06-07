@@ -9,7 +9,7 @@ import (
 /**
  * @arg pageSize
  * @arg pageNum 页码
- * @arg hero 查询条件
+ * @arg skill 查询条件
  * @return skills 技能数据切片
  */
 func SkillsInfoPage(db *gorm.DB,pageSize int,pageNum int,skill *entity.Skill)(skills []entity.Skill){
@@ -28,7 +28,7 @@ func SkillInfoCount(db *gorm.DB,skill *entity.Skill)(count int){
  * @arg id 技能id
  * @return skill
  */
-func SkillInfoById(db *gorm.DB,id int)(skill *entity.Skill){
+func SkillInfoById(db *gorm.DB,id int)(skill entity.Skill){
 	db.Where("id = ?",id).Find(&skill)
 	return
 }

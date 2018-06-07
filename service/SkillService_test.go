@@ -20,7 +20,7 @@ func TestGetSkillInfo(t *testing.T) {
 	defer db.Close()
 	skill := entity.Skill{}
 	skill.Expend = 2
-	skills := SkillsInfoPage(db,1,2,&skill)
+	skills := SkillsInfoPage(db,1,1,&skill)
 	for _,v:=range skills{
 		fmt.Println(v)
 	}
