@@ -11,7 +11,7 @@ func TestCreateSkill(t *testing.T) {
 	db := restgo.OpenDBConnect()
 	defer db.Close()
 	skill := entity.Skill{0,"Crackle","skillImage3",2,"高级寒冰术"}
-	flag := SkillOfCreate(db,&skill)
+	flag := SkillOfCreate(&skill)
 	fmt.Println(flag)
 }
 
@@ -20,7 +20,7 @@ func TestGetSkillInfo(t *testing.T) {
 	defer db.Close()
 	skill := entity.Skill{}
 	skill.Expend = 2
-	skills := SkillsInfoPage(db,1,1,&skill)
+	skills := SkillsInfoPage(1,1,&skill)
 	for _,v:=range skills{
 		fmt.Println(v)
 	}
@@ -31,14 +31,14 @@ func TestGetSkillInfoCount(t *testing.T) {
 	defer db.Close()
 	skill := entity.Skill{}
 	skill.Expend = 2
-	count := SkillInfoCount(db,&skill)
+	count := SkillInfoCount(&skill)
 	fmt.Println(count)
 }
 
 func TestGetSkillInfoById(t *testing.T) {
 	db := restgo.OpenDBConnect()
 	defer db.Close()
-	skill := SkillInfoById(db,1)
+	skill := SkillInfoById(1)
 	fmt.Println(skill)
 }
 
@@ -48,6 +48,6 @@ func TestUpdateSkill(t *testing.T) {
 	skill := entity.Skill{}
 	skill.Id = 1
 	skill.Expend = 2
-	flag := SkillOfUpdate(db,&skill)
+	flag := SkillOfUpdate(&skill)
 	fmt.Println(flag)
 }

@@ -1,7 +1,6 @@
 package service
 
 import (
-	"github.com/jinzhu/gorm"
 	"HearthStoneDatabase/entity"
 	"HearthStoneDatabase/restgo"
 )
@@ -12,14 +11,14 @@ import (
  * @arg skill 查询条件
  * @return skills 技能数据切片
  */
-func SkillsInfoPage(db *gorm.DB,pageSize int,pageNum int,skill *entity.Skill)(skills []entity.Skill){
-	db.Where(&skill).Offset(restgo.GetPageOffset(pageSize,pageNum)).Limit(pageSize).Find(&skills)
+func SkillsInfoPage(pageSize int,pageNum int,skill *entity.Skill)(skills []entity.Skill){
+	restgo.Db.Where(&skill).Offset(restgo.GetPageOffset(pageSize,pageNum)).Limit(pageSize).Find(&skills)
 	return
 }
 
 //获取该条件下的总条数
-func SkillInfoCount(db *gorm.DB,skill *entity.Skill)(count int){
-	db.Model(&skill).Where(&skill).Count(&count)
+func SkillInfoCount(skill *entity.Skill)(count int){
+	restgo.Db.Model(&skill).Where(&skill).Count(&count)
 	return
 }
 
@@ -28,19 +27,19 @@ func SkillInfoCount(db *gorm.DB,skill *entity.Skill)(count int){
  * @arg id 技能id
  * @return skill
  */
-func SkillInfoById(db *gorm.DB,id int)(skill entity.Skill){
-	db.Where("id = ?",id).Find(&skill)
+func SkillInfoById(id int)(skill entity.Skill){
+	restgo.Db.Where("id = ?",id).Find(&skill)
 	return
 }
 
 //只更新struct里非空字段,返回影响条数
-func SkillOfUpdate(db *gorm.DB,skill *entity.Skill)int64{
-	return db.Model(&skill).Updates(&skill).RowsAffected
+func SkillOfUpdate(skill *entity.Skill)int64{
+	return restgo.Db.Model(&skill).Updates(&skill).RowsAffected
 }
 
 //插入一条新数据,返回影响条数
-func SkillOfCreate(db *gorm.DB,skill *entity.Skill)int64{
-	return db.Create(&skill).RowsAffected
+func SkillOfCreate(skill *entity.Skill)int64{
+	return restgo.Db.Create(&skill).RowsAffected
 }
 
 

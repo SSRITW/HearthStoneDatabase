@@ -1,30 +1,34 @@
 package service
 
 import (
-	"github.com/jinzhu/gorm"
 	"HearthStoneDatabase/entity"
 	"HearthStoneDatabase/restgo"
 )
 
-func CardPackageInfoPage(db *gorm.DB,pageSize int,pageNum int,cardPackage *entity.CardPackage)(cardPackages []entity.CardPackage){
-	db.Where(&cardPackage).Offset(restgo.GetPageOffset(pageSize,pageNum)).Limit(pageSize).Find(&cardPackages)
+//获取该条件下、该页码的数据
+func CardPackageInfoPage(pageSize int,pageNum int,cardPackage *entity.CardPackage)(cardPackages []entity.CardPackage){
+	restgo.Db.Where(&cardPackage).Offset(restgo.GetPageOffset(pageSize,pageNum)).Limit(pageSize).Find(&cardPackages)
 	return
 }
 
-func CardPackageInfoCount(db *gorm.DB,cardPackage *entity.CardPackage)(count int){
-	db.Model(&cardPackage).Where(&cardPackage).Count(&count)
+//获取该条件下的数据总数
+func CardPackageInfoCount(cardPackage *entity.CardPackage)(count int){
+	restgo.Db.Model(&cardPackage).Where(&cardPackage).Count(&count)
 	return
 }
 
-func CardPackageInfoById(db *gorm.DB,id int)(cardPackage entity.CardPackage){
-	db.Where("id = ?",id).Find(&cardPackage)
+//通过id获取该数据
+func CardPackageInfoById(id int)(cardPackage entity.CardPackage){
+	restgo.Db.Where("id = ?",id).Find(&cardPackage)
 	return
 }
 
-func CardPackageOfCreate(db *gorm.DB,cardPackage *entity.CardPackage)(int64){
-	return db.Create(&cardPackage).RowsAffected
+//插入一条新数据
+func CardPackageOfCreate(cardPackage *entity.CardPackage)(int64){
+	return restgo.Db.Create(&cardPackage).RowsAffected
 }
 
-func CardPackageOfUpdate(db *gorm.DB,cardPackage *entity.CardPackage)(int64){
-	return db.Model(&cardPackage).Updates(cardPackage).RowsAffected
+//更新数据
+func CardPackageOfUpdate(cardPackage *entity.CardPackage)(int64){
+	return restgo.Db.Model(&cardPackage).Updates(cardPackage).RowsAffected
 }

@@ -21,15 +21,15 @@ const
  * @arg hero 查询条件
  * @return heroes 英雄数据切片
  */
-func HeroInfoPage(db *gorm.DB,pageSize int,pageNum int,hero *entity.Hero)(heroes []model.Hero){
-	getWhereQuery(db,hero).Select(_SELECT_STR).Joins(_JOIN_SKILL).Joins(_JOIN_PROFESSION).Table(_TABLE_NAME).
+func HeroInfoPage(pageSize int,pageNum int,hero *entity.Hero)(heroes []model.Hero){
+	getWhereQuery(restgo.Db,hero).Select(_SELECT_STR).Joins(_JOIN_SKILL).Joins(_JOIN_PROFESSION).Table(_TABLE_NAME).
 		Offset(restgo.GetPageOffset(pageSize,pageNum)).Limit(pageSize).Scan(&heroes)
 	return
 }
 
 //获取该条件下的总条数
-func HeroInfoCount(db *gorm.DB,hero *entity.Hero)(count int){
-	getWhereQuery(db,hero).Select(_SELECT_STR).Joins(_JOIN_SKILL).Joins(_JOIN_PROFESSION).Table(_TABLE_NAME).Count(&count)
+func HeroInfoCount(hero *entity.Hero)(count int){
+	getWhereQuery(restgo.Db,hero).Select(_SELECT_STR).Joins(_JOIN_SKILL).Joins(_JOIN_PROFESSION).Table(_TABLE_NAME).Count(&count)
 	return
 }
 
@@ -38,23 +38,23 @@ func HeroInfoCount(db *gorm.DB,hero *entity.Hero)(count int){
  * @arg id 英雄id
  * @return hero
  */
-func HeroInfoById(db *gorm.DB,id int)(hero model.Hero){
+func HeroInfoById(id int)(hero model.Hero){
 	/*db.Debug().Where("id = ?",id).Find(&hero)
 	db.Debug().Model(&hero).Related(&hero.Skill)*/
 
-	db.Table(_TABLE_NAME).Select(_SELECT_STR).
+	restgo.Db.Table(_TABLE_NAME).Select(_SELECT_STR).
 		Joins(_JOIN_SKILL).Joins(_JOIN_PROFESSION).Where("hero.id = ?",id).Scan(&hero)
 	return
 }
 
 //插入一条新数据,返回影响条数
-func HeroOfCreate(db *gorm.DB,hero *entity.Hero)(int64){
-	return db.Create(&hero).RowsAffected
+func HeroOfCreate(hero *entity.Hero)(int64){
+	return restgo.Db.Create(&hero).RowsAffected
 }
 
 //只更新struct里非空字段,返回影响条数
-func HeroOfUpdate(db *gorm.DB,hero *entity.Hero)(int64){
-	return db.Model(&hero).Updates(&hero).RowsAffected
+func HeroOfUpdate(hero *entity.Hero)(int64){
+	return restgo.Db.Model(&hero).Updates(&hero).RowsAffected
 }
 
 
