@@ -15,12 +15,24 @@ const
 	_JOIN_PROFESSION = `join t_professions profession on profession.id = hero.profession_id`
 )
 
-func GetHeroInfo(db *gorm.DB,pageSize int,pageNum int,hero *entity.Hero)(heroes []model.Hero){
+/**
+ * @arg pageSize
+ * @arg pageNum 页码
+ * @arg hero 查询条件
+ * @return heroes 英雄数据切片
+ * @return countNum 数据总条数
+ */
+func GetHeroInfoPage(db *gorm.DB,pageSize int,pageNum int,hero *entity.Hero)(heroes []model.Hero,countNum int){
 	getWhereQuery(db,hero).Select(_SELECT_STR).Joins(_JOIN_SKILL).Joins(_JOIN_PROFESSION).Table(_TABLE_NAME).
-		Offset(restgo.GetPageOffset(pageSize,pageNum)).Limit(pageSize).Scan(&heroes)
+		Offset(restgo.GetPageOffset(pageSize,pageNum)).Limit(pageSize).Scan(&heroes).Count(&countNum)
 	return
 }
 
+/**
+ * @arg pageSize
+ * @arg id 英雄id
+ * @return hero
+ */
 func GetHeroInfoById(db *gorm.DB,id int)(hero model.Hero){
 	/*db.Debug().Where("id = ?",id).Find(&hero)
 	db.Debug().Model(&hero).Related(&hero.Skill)*/
@@ -30,13 +42,16 @@ func GetHeroInfoById(db *gorm.DB,id int)(hero model.Hero){
 	return
 }
 
-func AddHero(db *gorm.DB,hero *entity.Hero){
-	db.Create(&hero)
+//插入一条新数据,返回影响条数
+func AddHero(db *gorm.DB,hero *entity.Hero)(int64){
+	return db.Create(&hero).RowsAffected
 }
 
-func UpdateHero(db *gorm.DB,hero *entity.Hero){
-	db.Save(&hero)
+//只更新struct里非空字段,返回影响条数
+func UpdateHero(db *gorm.DB,hero *entity.Hero)(int64){
+	return db.Model(&hero).Updates(&hero).RowsAffected
 }
+
 
 func getWhereQuery(db *gorm.DB,hero *entity.Hero)(*gorm.DB){
 
