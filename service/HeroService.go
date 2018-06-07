@@ -10,7 +10,7 @@ import (
 const
 (
 	_TABLE_NAME = `t_heros hero`
-	_SELECT_STR = `hero.*,skill.name as skill_name,skill.image_src as skill_image_src,profession.name as profession_name`
+	_SELECT_STR = `hero.*,skill.name as skill_name,skill.image_src as skill_image_src,skill.expend as skill_expend,skill.describe as skill_describe,profession.name as profession_name`
 	_JOIN_SKILL = `join t_skills skill on skill.id = hero.skill_id`
 	_JOIN_PROFESSION = `join t_professions profession on profession.id = hero.profession_id`
 )
