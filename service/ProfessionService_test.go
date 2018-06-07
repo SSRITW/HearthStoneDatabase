@@ -10,7 +10,7 @@ import (
 func TestProfessionOfCreate(t *testing.T) {
 	db := restgo.OpenDBConnect()
 	defer db.Close()
-	profession := entity.Profession{0,"牧师"}
+	profession := entity.Profession{0,"牧师","牧师卡面"}
 	flag := ProfessionOfCreate(&profession)
 	fmt.Println(flag)
 }
@@ -18,7 +18,7 @@ func TestProfessionOfCreate(t *testing.T) {
 func TestProfessionOfUpdate(t *testing.T) {
 	db := restgo.OpenDBConnect()
 	defer db.Close()
-	profession := entity.Profession{1,"法师"}
+	profession := entity.Profession{1,"法师","牧师卡面"}
 	flag := ProfessionOfUpdate(&profession)
 	fmt.Println(flag)
 }
@@ -33,7 +33,7 @@ func TestProfessionInfoById(t *testing.T) {
 func TestProfessionInfoCount(t *testing.T) {
 	db := restgo.OpenDBConnect()
 	defer db.Close()
-	profession := entity.Profession{0,"法师"}
+	profession := entity.Profession{0,"法师","牧师卡面"}
 	count := ProfessionInfoCount(&profession);
 	fmt.Println(count)
 }

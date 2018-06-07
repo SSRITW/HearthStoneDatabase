@@ -17,9 +17,10 @@ type CardBase struct {
 	Name string `gorm:"not null"`
 	Rarity string `gorm:"not null"`
 	IsGolden string `gorm:"not null"`
-	TypeId string `gorm:"not null"`
+	TypeId int `gorm:"not null"`
 	IsNormal string `gorm:"not null"`
 	Expend int `gorm:"not null"`
+	Image string `gorm:"not null"`
 	Describe string `gorm:"not null"`
 	CardPackageId int `gorm:"not null"`
 	ProfessionId int `gorm:"not null"`

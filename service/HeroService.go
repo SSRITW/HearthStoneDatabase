@@ -29,7 +29,7 @@ func HeroInfoPage(pageSize int,pageNum int,hero *entity.Hero)(heroes []model.Her
 
 //获取该条件下的总条数
 func HeroInfoCount(hero *entity.Hero)(count int){
-	getWhereQuery(restgo.Db,hero).Select(_SELECT_STR).Joins(_JOIN_SKILL).Joins(_JOIN_PROFESSION).Table(_TABLE_NAME).Count(&count)
+	getWhereQuery(restgo.Db,hero).Joins(_JOIN_SKILL).Joins(_JOIN_PROFESSION).Table(_TABLE_NAME).Count(&count)
 	return
 }
 
