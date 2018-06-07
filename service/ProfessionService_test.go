@@ -43,7 +43,7 @@ func TestProfessionInfoPage(t *testing.T) {
 	defer db.Close()
 	//profession := entity.Profession{0,"牧师"}
 	profession := entity.Profession{}
-	result := ProfessionInfoPage(db,1,2,&profession);
+	result := ProfessionInfoPage(db,5,1,&profession);
 	for _,v:=range result{
 		fmt.Println(v)
 	}
