@@ -45,7 +45,7 @@ func CardBseOfCreate(base *entity.CardBase)(int64){
 func getCardWhereQuery(db *gorm.DB,base *entity.CardBase)(*gorm.DB){
 
 	if base.Name != "" {
-		db = db.Where("cBase.name like '%"+base.Name+"%'")
+		db = db.Where("cBase.name like ?","%"+base.Name+"%")
 	}
 
 	if base.Rarity != "" {
