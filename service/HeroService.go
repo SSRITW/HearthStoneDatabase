@@ -61,7 +61,7 @@ func HeroOfUpdate(hero *entity.Hero)(int64){
 func getWhereQuery(db *gorm.DB,hero *entity.Hero)(*gorm.DB){
 
 	if hero.Name!="" {
-		db = db.Where("hero.name = ?",hero.Name)
+		db = db.Where("hero.name like ?","%"+hero.Name+"%")
 	}
 
 	if hero.ProfessionId!=0 {
