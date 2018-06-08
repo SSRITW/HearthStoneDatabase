@@ -16,14 +16,17 @@ func OpenDBConnect()(*gorm.DB){
 		return "t_" + defaultTableName;
 	}
 
+	configDateSource := Datasource{}
+	configDateSource.InitData()
+
 	var err error
-	Db, err = gorm.Open("mysql", "root:123456@(localhost:3306)/hearthstonedb?charset=utf8&parseTime=True&loc=Local")
+	Db, err = gorm.Open(configDateSource.DriveName, configDateSource.ConnetionURL)
 
 	if err !=nil {
 		fmt.Println(err.Error())
 	}
 	Db.AutoMigrate(&entity.Profession{},&entity.Skill{},&entity.Hero{},&entity.CardType{},&entity.CardPackage{},&entity.CardBase{})
-	Db.LogMode(true)
+	//Db.LogMode(true)
 	return Db
 }
 
