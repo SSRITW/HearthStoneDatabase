@@ -6,6 +6,7 @@ import (
 	"HearthStoneDatabase/model"
 	"HearthStoneDatabase/service"
 	"net/http"
+	"fmt"
 )
 
 func HeroInfoListPage(c *gin.Context){
@@ -13,6 +14,7 @@ func HeroInfoListPage(c *gin.Context){
 	page := model.Page{}
 	c.Bind(&page)
 	c.Bind(&hero)
+	fmt.Println("hero:",hero,"page:",page)
 	heroList := service.HeroInfoPage(page.PageSize,page.PageNum,&hero)
 	c.JSON(http.StatusOK,heroList)
 }
