@@ -26,8 +26,7 @@ func TestGetHeroInfoPage(t *testing.T) {
 	db := restgo.OpenDBConnect()
 	defer db.Close()
 	hero := entity.Hero{}
-	hero.Name = "hero"
-	heroes:= HeroInfoPage(2,1,&hero)
+	heroes:= HeroInfoPage(10,1,&hero)
 	for _,v:=range heroes {
 		fmt.Println(v)
 	}
