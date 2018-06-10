@@ -38,8 +38,14 @@ func CardBaseOfUpdate(base *entity.CardBase)(int64){
 	return restgo.Db.Model(&base).Updates(&base).RowsAffected
 }
 
-func CardBseOfCreate(base *entity.CardBase)(int64){
+func CardBaseOfCreate(base *entity.CardBase)(int64){
 	return restgo.Db.Create(&base).RowsAffected
+}
+
+func CardBaseOfDelete(id int)(int64){
+	base := entity.CardBase{}
+	base.Id = id
+	return restgo.Db.Delete(&base).RowsAffected
 }
 
 func getCardWhereQuery(db *gorm.DB,base *entity.CardBase)(*gorm.DB){

@@ -37,3 +37,9 @@ func CardTypeOfUpdate(cardType *entity.CardType)(int64){
 func CardTypeOfCreate(cardType *entity.CardType)(int64){
 	return restgo.Db.Create(&cardType).RowsAffected
 }
+
+func CardTypeOfDelete(id int)(int64){
+	cardType := entity.CardType{}
+	cardType.Id = id
+	return restgo.Db.Delete(&cardType).RowsAffected
+}

@@ -36,3 +36,10 @@ func ProfessionOfUpdate(profession *entity.Profession)(int64){
 func ProfessionOfCreate(profession *entity.Profession)(int64){
 	return restgo.Db.Create(&profession).RowsAffected
 }
+
+func ProfessionOfDelete(id int)(int64){
+	profession := entity.Profession{}
+	profession.Id = id
+
+	return restgo.Db.Delete(&profession).RowsAffected
+}

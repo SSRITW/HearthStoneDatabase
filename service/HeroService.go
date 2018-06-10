@@ -57,6 +57,11 @@ func HeroOfUpdate(hero *entity.Hero)(int64){
 	return restgo.Db.Model(&hero).Updates(&hero).RowsAffected
 }
 
+func HeroOfDelete(id int)(int64){
+	hero := entity.Hero{}
+	hero.Id = id
+	return restgo.Db.Delete(&hero).RowsAffected
+}
 
 func getWhereQuery(db *gorm.DB,hero *entity.Hero)(*gorm.DB){
 

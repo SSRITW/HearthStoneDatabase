@@ -42,6 +42,12 @@ func SkillOfCreate(skill *entity.Skill)int64{
 	return restgo.Db.Create(&skill).RowsAffected
 }
 
+func SkillOfDelete(id int)(int64){
+	skill := entity.Skill{}
+	skill.Id = id
+	return restgo.Db.Delete(&skill).RowsAffected
+}
+
 
 
 

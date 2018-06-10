@@ -9,7 +9,7 @@ import (
 	"fmt"
 )
 
-func FindHeroInfoListPage(c *gin.Context){
+func HeroInfoListPage(c *gin.Context){
 	hero := entity.Hero{}
 	page := model.Page{10,1}
 	c.Bind(&page)
@@ -24,7 +24,7 @@ func FindHeroInfoListPage(c *gin.Context){
 	})
 }
 
-func FindHeroInfoById(c *gin.Context){
+func HeroInfoById(c *gin.Context){
 	id := c.GetInt("id")
 	hero := service.HeroInfoById(id)
 	c.JSON(http.StatusOK,gin.H{
@@ -33,7 +33,7 @@ func FindHeroInfoById(c *gin.Context){
 	})
 }
 
-func SaveHero(c *gin.Context){
+func HeroOfSave(c *gin.Context){
 	hero := entity.Hero{}
 	c.Bind(&hero)
 	var status int64
@@ -47,5 +47,14 @@ func SaveHero(c *gin.Context){
 	c.JSON(http.StatusOK,gin.H{
 		"status" : status,
 		"id" : hero.Id,
+	})
+}
+
+func HeroOfDelete(c *gin.Context){
+	id := c.GetInt("id")
+	status := service.HeroOfDelete(id)
+
+	c.JSON(http.StatusOK,gin.H{
+		"status" : status,
 	})
 }

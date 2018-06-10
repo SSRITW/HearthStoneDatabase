@@ -32,3 +32,9 @@ func CardPackageOfCreate(cardPackage *entity.CardPackage)(int64){
 func CardPackageOfUpdate(cardPackage *entity.CardPackage)(int64){
 	return restgo.Db.Model(&cardPackage).Updates(cardPackage).RowsAffected
 }
+
+func CardPackageOfDelete(id int)(int64){
+	cardPackage := entity.CardPackage{}
+	cardPackage.Id =  id
+	return restgo.Db.Delete(&cardPackage).RowsAffected
+}
