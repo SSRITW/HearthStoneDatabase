@@ -1,9 +1,9 @@
 package entity
 
 type CardType struct {
-	Id int `gorm:"primary_key;AUTO_INCREMENT"`
-	Name string `gorm:"not null"`
-	Describe string `gorm:"not null"`
+	Id int `json:"id" form:"id" gorm:"primary_key;AUTO_INCREMENT"`
+	Name string `json:"name" form:"name" gorm:"not null"`
+	Describe string `json:"describe" form:"describe" gorm:"not null"`
 }
 
 type CardPackage struct {

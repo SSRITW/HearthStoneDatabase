@@ -13,7 +13,7 @@ func TestCardBseOfCreate(t *testing.T) {
 	defer db.Close()
 
 	card := entity.CardBase{0,"法术浮龙","0","0",1,"0",1,"卡牌图片","描述",1,1}
-	count := service.CardBseOfCreate(&card)
+	count := service.CardBaseOfCreate(&card)
 	fmt.Println(count)
 }
 

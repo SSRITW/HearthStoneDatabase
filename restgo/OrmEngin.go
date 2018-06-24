@@ -9,18 +9,19 @@ import (
 
 var Db *gorm.DB
 
+var ConfigDateSource DBConnectionInfo
+
 func OpenDBConnect()(*gorm.DB){
 
 	//更改默认表名
-	gorm.DefaultTableNameHandler = func (db *gorm.DB, defaultTableName string) string  {
+	/*gorm.DefaultTableNameHandler = func (db *gorm.DB, defaultTableName string) string  {
 		return "t_" + defaultTableName;
-	}
+	}*/
 
-	configDateSource := Datasource{}
-	configDateSource.InitData()
+	ConfigDateSource.InitData()
 
 	var err error
-	Db, err = gorm.Open(configDateSource.DriveName, configDateSource.ConnetionURL)
+	Db, err = gorm.Open(ConfigDateSource.Database.DriveName, ConfigDateSource.Database.ConnetionURL)
 
 	if err !=nil {
 		fmt.Println(err.Error())
@@ -29,6 +30,7 @@ func OpenDBConnect()(*gorm.DB){
 	Db.LogMode(true)
 	return Db
 }
+
 
 
 
