@@ -1,3 +1,12 @@
 database:
   drive_name: mysql
   connetion_url: root:123456@(localhost:3306)/hearthstonedb?charset=utf8&parseTime=True&loc=Local
+  max_idle_conns: 10
+  max_open_conns: 100
+redis:
+  host: 127.0.0.1:6379
+  password: 123456
+  access_token_db: 1
+  refresh_token_db: 1
+  max_idle: 10
+  max_active: 100

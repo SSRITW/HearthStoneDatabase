@@ -9,8 +9,6 @@ import (
 
 var Db *gorm.DB
 
-var ConfigDateSource DBConnectionInfo
-
 func OpenDBConnect()(*gorm.DB){
 
 	//更改默认表名
@@ -18,11 +16,10 @@ func OpenDBConnect()(*gorm.DB){
 		return "t_" + defaultTableName;
 	}*/
 
-	ConfigDateSource.InitData()
-
 	var err error
-	Db, err = gorm.Open(ConfigDateSource.Database.DriveName, ConfigDateSource.Database.ConnetionURL)
-
+	Db, err = gorm.Open(ConfigDataSource.Database.DriveName, ConfigDataSource.Database.ConnetionURL)
+	Db.DB().SetMaxIdleConns(ConfigDataSource.Database.MaxIdleConns)
+	Db.DB().SetMaxOpenConns(ConfigDataSource.Database.MaxOpenConns)
 	if err !=nil {
 		fmt.Println(err.Error())
 	}

@@ -7,6 +7,7 @@ import (
 	"HearthStoneDatabase/service"
 	"net/http"
 	"fmt"
+	"strconv"
 )
 
 func HeroInfoListPage(c *gin.Context){
@@ -25,7 +26,8 @@ func HeroInfoListPage(c *gin.Context){
 }
 
 func HeroInfoById(c *gin.Context){
-	id := c.GetInt("id")
+	idStr := c.Query("id")
+	id,_ := strconv.Atoi(idStr)
 	hero := service.HeroInfoById(id)
 	c.JSON(http.StatusOK,gin.H{
 		"data" : hero,
@@ -51,7 +53,8 @@ func HeroOfSave(c *gin.Context){
 }
 
 func HeroOfDelete(c *gin.Context){
-	id := c.GetInt("id")
+	idStr := c.Query("id")
+	id,_ := strconv.Atoi(idStr)
 	status := service.HeroOfDelete(id)
 
 	c.JSON(http.StatusOK,gin.H{

@@ -6,6 +6,7 @@ import (
 	"HearthStoneDatabase/entity"
 	"HearthStoneDatabase/service"
 	"net/http"
+	"strconv"
 )
 
 func CardTypeInfoListPage(c *gin.Context){
@@ -33,7 +34,8 @@ func CardTypeAllInfo(c *gin.Context){
 }
 
 func CardTypeInfoById(c *gin.Context){
-	id := c.GetInt("id")
+	idStr := c.Query("id")
+	id,_ := strconv.Atoi(idStr)
 	cardType := service.CardTypeInfoById(id)
 
 	c.JSON(http.StatusOK,gin.H{
@@ -59,7 +61,8 @@ func CardTypeOfSave(c *gin.Context){
 }
 
 func CardTypeOfDelete(c *gin.Context){
-	id := c.GetInt("id")
+	idStr := c.Query("id")
+	id,_ := strconv.Atoi(idStr)
 	status := service.CardTypeOfDelete(id)
 	c.JSON(http.StatusOK,gin.H{
 		"status" : status,

@@ -6,6 +6,7 @@ import (
 	"HearthStoneDatabase/entity"
 	"HearthStoneDatabase/service"
 	"net/http"
+	"strconv"
 )
 
 func ProfessionInfoListPage(c *gin.Context){
@@ -33,7 +34,8 @@ func ProfessionAllInfo(c *gin.Context){
 }
 
 func ProfessionInfoById(c *gin.Context){
-	id := c.GetInt("id")
+	idStr := c.Query("id")
+	id,_ := strconv.Atoi(idStr)
 	profession := service.ProfessionInfoById(id)
 
 	c.JSON(http.StatusOK,gin.H{
@@ -59,7 +61,8 @@ func ProfessionOfSave(c *gin.Context){
 }
 
 func ProfessionOfDelete(c *gin.Context){
-	id := c.GetInt("id")
+	idStr := c.Query("id")
+	id,_ := strconv.Atoi(idStr)
 	status := service.ProfessionOfDelete(id)
 	c.JSON(http.StatusOK,gin.H{
 		"status" : status,
