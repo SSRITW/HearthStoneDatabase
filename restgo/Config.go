@@ -5,8 +5,12 @@ import (
 	"gopkg.in/yaml.v2"
 	"path"
 	"os"
+	"strings"
 )
 
+const(
+	ProjectName = "HearthStoneDatabase"
+)
 var ConfigDataSource DBConnectionInfo
 
 type DBConnectionInfo struct {
@@ -29,7 +33,10 @@ type DBConnectionInfo struct {
 
 func ( datasourse *DBConnectionInfo) InitData(){
 	wr, _ := os.Getwd()
-	filePath := path.Join(wr, "config", "db_config.yml")
+	//去除项目名称后面的字符串（解决test方法无法读取配置文件的问题
+	projectPath := wr[0:strings.Index(wr,ProjectName)+len(ProjectName)]
+
+	filePath := path.Join(projectPath, "config", "db_config.yml")
 	data, _ := ioutil.ReadFile(filePath)
 	//把yaml形式的字符串解析成struct类型
 	yaml.Unmarshal(data, &datasourse)

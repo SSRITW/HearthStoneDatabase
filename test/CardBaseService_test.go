@@ -6,6 +6,7 @@ import (
 	"HearthStoneDatabase/entity"
 	"fmt"
 	"HearthStoneDatabase/service"
+	"strings"
 )
 
 func TestCardBseOfCreate(t *testing.T) {
@@ -45,10 +46,14 @@ func TestCardBaseInfoCount(t *testing.T) {
 }
 
 func TestCardBaseInfoPage(t *testing.T) {
-	db := restgo.OpenDBConnect()
+	/*db := restgo.OpenDBConnect()
 	defer db.Close()
 	card := entity.CardBase{}
 	card.Name = "龙"
 	cards := service.CardBaseInfoPage(2,1,&card)
-	fmt.Println(cards)
+	fmt.Println(cards)*/
+	testStr := "c:path/projectName/test"
+	subStr := "projectName"
+	result := strings.Index(testStr,subStr)+len(subStr)
+	fmt.Println(testStr[0:result])
 }
