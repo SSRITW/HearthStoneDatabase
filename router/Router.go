@@ -50,3 +50,7 @@ func CardPackageRouter(r *gin.Engine){
 	r.DELETE("/cardPackage/delete",controller.CardPackageOfDelete)
 	r.POST("/cardPackage/save",controller.CardPackageOfSave)
 }
+
+func AuthoriztionRouter(r *gin.Engine){
+	r.POST("/authorization/login",controller.Login)
+}

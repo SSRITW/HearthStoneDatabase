@@ -25,6 +25,8 @@ func main() {
 	router.CardTypeRouter(r)
 	router.ProfessionRouter(r)
 	router.SkillRouter(r)
+	router.AuthoriztionRouter(r)
+
 	r.Run("127.0.0.1:80") // listen and serve on 127.0.0.1:80
 
 }

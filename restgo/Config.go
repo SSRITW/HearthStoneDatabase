@@ -9,7 +9,8 @@ import (
 )
 
 const(
-	ProjectName = "HearthStoneDatabase"
+	PROJECTNAME = "HearthStoneDatabase"
+	VISITOR = "visitor"
 )
 var ConfigDataSource DBConnectionInfo
 
@@ -34,7 +35,7 @@ type DBConnectionInfo struct {
 func ( datasourse *DBConnectionInfo) InitData(){
 	wr, _ := os.Getwd()
 	//去除项目名称后面的字符串（解决test方法无法读取配置文件的问题
-	projectPath := wr[0:strings.Index(wr,ProjectName)+len(ProjectName)]
+	projectPath := wr[0:strings.Index(wr,PROJECTNAME)+len(PROJECTNAME)]
 
 	filePath := path.Join(projectPath, "config", "db_config.yml")
 	data, _ := ioutil.ReadFile(filePath)

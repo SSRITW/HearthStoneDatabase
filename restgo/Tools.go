@@ -5,6 +5,7 @@ import (
 	"time"
 	"crypto/md5"
 	"encoding/hex"
+	"github.com/satori/go.uuid"
 )
 
 func GetPageOffset(pageSize int ,pageNum int)(offset int) {
@@ -12,6 +13,11 @@ func GetPageOffset(pageSize int ,pageNum int)(offset int) {
 		offset = pageSize * (pageNum-1)
 	}
 	return
+}
+
+func GetToken()(token string){
+	uuid,_ := uuid.NewV4()
+	return MD5(uuid.String())
 }
 
 // 生成32位MD5
