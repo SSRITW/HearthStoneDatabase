@@ -1,11 +1,11 @@
 package entity
 
 type Skill struct {
-	Id int `gorm:"primary_key;AUTO_INCREMENT"`
-	Name string `gorm:"not null"`
-	ImageSrc string `gorm:"not null"`
-	Expend int `gorm:"not null"`
-	Describe string `gorm:"not null"`
+	Id int `gorm:"primary_key;AUTO_INCREMENT" json:"id" form:"id" binding:"required" `
+	Name string `gorm:"not null" json:"name" form:"name" binding:"required" `
+	ImageSrc string `gorm:"not null" json:"image_src" form:"image_src" binding:"required"`
+	Expend int `gorm:"not null" json:"expend" form:"expend" binding:"required"`
+	Describe string `gorm:"not null" json:"describe" form:"describe" binding:"required"`
 }
 
 type Hero struct {
