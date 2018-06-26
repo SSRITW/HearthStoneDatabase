@@ -19,7 +19,7 @@ func Login(c *gin.Context){
 	httpStatus := 200
 
 	if userInfo.Id==0 {
-		result["msg"] = "用户名或密码不存在"
+		result["msg"] = "用户名不存在或密码错误"
 		result["status"] = restgo.LOGIN_FAIL_STATUS
 	}else{
 		redisAccessConn := restgo.AccessTokenRedisClient.Get()

@@ -10,7 +10,7 @@ func UserInfoByLoginNameAndPassword(user *entity.User)( userInfo entity.User){
 	userInfo = UserInfoByLoginName(user.LoginName)
 	//将明文密码+查询出来的盐值md5，匹配查询出来的密码
 	if restgo.MD5(user.Password + userInfo.Salt) == userInfo.Password {
-
+		userInfo.Password = user.Password
 		setNewSaltAndPassword(&userInfo)
 		restgo.Db.Save(&userInfo)
 		return
