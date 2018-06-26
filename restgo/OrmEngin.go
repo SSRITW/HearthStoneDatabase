@@ -23,7 +23,7 @@ func OpenDBConnect()(*gorm.DB){
 	if err !=nil {
 		fmt.Println(err.Error())
 	}
-	Db.AutoMigrate(&entity.Profession{},&entity.Skill{},&entity.Hero{},&entity.CardType{},&entity.CardPackage{},&entity.CardBase{})
+	Db.AutoMigrate(&entity.Profession{},&entity.Skill{},&entity.Hero{},&entity.CardType{},&entity.CardPackage{},&entity.CardBase{},&entity.User{})
 	Db.LogMode(true)
 	return Db
 }

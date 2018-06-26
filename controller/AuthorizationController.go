@@ -15,39 +15,41 @@ func Login(c *gin.Context){
 	c.Bind(&user)
 	userInfo := service.UserInfoByLoginNameAndPassword(&user)
 
-	redisAccessConn := restgo.AccessTokenRedisClient.Get()
-	defer redisAccessConn.Close()
+	result := gin.H{}
+	httpStatus := 200
 
-	accessToken := restgo.GetToken()
-	if _, err := redisAccessConn.Do("HMSET",redis.Args{}.Add(accessToken).AddFlat(&userInfo)...); err!=nil {
-		fmt.Println("HMSET ERROR:",err.Error())
+	if userInfo.Id==0 {
+		result["msg"] = "用户名或密码不存在"
+		result["status"] = restgo.LOGIN_FAIL_STATUS
+	}else{
+		redisAccessConn := restgo.AccessTokenRedisClient.Get()
+		defer redisAccessConn.Close()
 
-		c.JSON(http.StatusInternalServerError,gin.H{
-			"msg" : "fail",
-			"status" : 0,
-		})
+		accessToken := restgo.GetToken()
+		if _, err := redisAccessConn.Do("HMSET",redis.Args{}.Add(accessToken).AddFlat(&userInfo)...); err!=nil {
+			fmt.Println("redis HMSET ERROR:",err.Error())
 
-		return
+			httpStatus = http.StatusInternalServerError
+			result["msg"] = "fail"
+			result["status"] = restgo.FAIL
+		} else {
+			redisRefreshConn := restgo.RefreshTokenRedisClient.Get()
+			defer redisRefreshConn.Close()
+
+			refreshToken := restgo.GetToken()
+			if _,err := redisRefreshConn.Do("SET",refreshToken,userInfo.Id); err!=nil {
+				fmt.Println("redis SET ERROR:",err.Error())
+
+				httpStatus = http.StatusInternalServerError
+				result["msg"] = "fail"
+				result["status"] = restgo.FAIL
+			} else {
+				result["refreshToken"] = refreshToken
+				result["accessToken"] = accessToken
+				result["status"] = restgo.SUCCESS_STATUS
+			}
+		}
 	}
 
-	redisRefreshConn := restgo.RefreshTokenRedisClient.Get()
-	defer redisRefreshConn.Close()
-
-	refreshToken := restgo.GetToken()
-	if _,err := redisRefreshConn.Do("set",refreshToken,userInfo.Id); err!=nil {
-		fmt.Println("HMSET ERROR:",err.Error())
-
-		c.JSON(http.StatusInternalServerError,gin.H{
-			"msg" : "fail",
-			"status" : 0,
-		})
-
-		return
-	}
-
-	c.JSON(http.StatusOK,gin.H{
-		"refreshToken" : refreshToken,
-		"accessToken" : accessToken,
-		"status" : 1,
-	})
+	c.JSON(httpStatus,result)
 }

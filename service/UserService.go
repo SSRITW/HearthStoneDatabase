@@ -21,7 +21,7 @@ func UserInfoByLoginNameAndPassword(user *entity.User)( userInfo entity.User){
 
 //通过登录名获取用户信息
 func UserInfoByLoginName(loginName string)(user entity.User){
-	restgo.Db.Where("login_name = ",user.LoginName).Find(&user)
+	restgo.Db.Where("login_name = ?",loginName).Find(&user)
 	return
 }
 

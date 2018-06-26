@@ -21,10 +21,11 @@ func GetToken()(token string){
 }
 
 // 生成32位MD5
-func MD5(text string) string{
+func MD5(text string) (result string){
 	ctx := md5.New()
 	ctx.Write([]byte(text))
-	return hex.EncodeToString(ctx.Sum(nil))
+	result = hex.EncodeToString(ctx.Sum(nil))
+	return
 }
 
 //获取八位随机数做盐值
