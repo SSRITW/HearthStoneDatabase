@@ -8,7 +8,7 @@ import (
 var AccessTokenRedisClient *redis.Pool
 var RefreshTokenRedisClient *redis.Pool
 
-func InitAccessTokenRedisPool() {
+func initAccessTokenRedisPool() {
 	// 建立连接池
 	AccessTokenRedisClient = &redis.Pool{
 		MaxIdle : ConfigDataSource.Redis.MaxIdle,
@@ -26,7 +26,7 @@ func InitAccessTokenRedisPool() {
 	}
 }
 
-func InitRefreshTokenRedisPool() {
+func initRefreshTokenRedisPool() {
 	// 建立连接池
 	RefreshTokenRedisClient = &redis.Pool{
 		MaxIdle : ConfigDataSource.Redis.MaxIdle,

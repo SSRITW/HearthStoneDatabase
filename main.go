@@ -8,12 +8,6 @@ import (
 )
 
 func main() {
-	restgo.ConfigDataSource.InitData() //读取配置文件的数据
-
-	restgo.OpenDBConnect()
-	restgo.InitAccessTokenRedisPool()
-	restgo.InitRefreshTokenRedisPool()
-	restgo.InitCasbin()
 
 	r := gin.Default()
 	r.Use(cors.Default())	//增加跨域支持

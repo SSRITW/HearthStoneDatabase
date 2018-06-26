@@ -14,7 +14,7 @@ import (
 var Enforcer *casbin.Enforcer
 
 //初始化权限管理
-func InitCasbin(){
+func initCasbin(){
 	wr, _ := os.Getwd()
 	adapter := gormadapter.NewAdapter(ConfigDataSource.Database.DriveName, ConfigDataSource.Database.ConnetionURL, true)
 	Enforcer = casbin.NewEnforcer(path.Join(wr,"config", "auth_model.conf"),adapter)

@@ -9,7 +9,7 @@ import (
 
 var Db *gorm.DB
 
-func OpenDBConnect()(*gorm.DB){
+func initDBConnect()(*gorm.DB){
 
 	//更改默认表名
 	/*gorm.DefaultTableNameHandler = func (db *gorm.DB, defaultTableName string) string  {

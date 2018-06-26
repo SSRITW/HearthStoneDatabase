@@ -32,7 +32,7 @@ type DBConnectionInfo struct {
 }
 
 
-func ( datasourse *DBConnectionInfo) InitData(){
+func ( datasourse *DBConnectionInfo) initConfig(){
 	wr, _ := os.Getwd()
 	//去除项目名称后面的字符串（解决test方法无法读取配置文件的问题
 	projectPath := wr[0:strings.Index(wr,PROJECTNAME)+len(PROJECTNAME)]
